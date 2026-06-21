@@ -1,0 +1,89 @@
+    * {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: clamp(16px, 4vw, 40px);
+    background: linear-gradient(180deg, #f9fbff 0%, #eef2f7 100%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main {
+    width: min(100%, 960px);
+    margin: 0 auto;
+}
+
+.card {
+    background-color: aqua;
+    width: min(100%, 24rem);
+    min-height: 12.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: 1rem;
+}
+
+p {
+    width: min(100%, 48rem);
+    margin: 0 0 1rem;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    line-height: 1.6;
+    font-size: clamp(1rem, 2.2vw, 1.125rem);
+}
+
+p::first-letter {
+    color: red;
+    font-size: clamp(2rem, 8vw, 3.125rem);
+}
+
+::marker {
+    color: red;
+    font-size: clamp(1rem, 3vw, 1.875rem);
+}
+
+p:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+p:nth-child(odd) {
+    background-color: #a86363;
+}
+
+div ~ p {
+    color: blue;
+}
+
+h1 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1.1;
+    margin: 1.5rem 0 0;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .main {
+        width: 100%;
+    }
+
+    .card,
+    p {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    p {
+        padding: 0.875rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+}
