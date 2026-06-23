@@ -50,10 +50,12 @@ console.log(number % 10);
 // -----------------------------------------------------------------------------
 // Q8 marks calculator
 
-let marks1 = 85;
-let marks2 = 90;
-let marks3 = 78;
-let totalmarks = marks1 + marks2 + marks3;
-let average = totalmarks / 3;
-console.log("Total Marks: " + totalmarks);
-console.log("Average Marks: " + average);
+// let marks1 = 85;
+// let marks2 = 90;
+// let marks3 = 78;
+// let totalmarks = marks1 + marks2 + marks3;
+// let average = totalmarks / 3;
+// console.log("Total Marks: " + totalmarks);
+// console.log("Average Marks: " + average);
+
+// -----------------------------------------------------------------------------
