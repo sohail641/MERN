@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reaction Game</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#222;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+}
+
+#timer{
+    font-size:60px;
+    margin-bottom:40px;
+}
+
+.container{
+    display:flex;
+    gap:30px;
+}
+
+.circle{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.red{background:red;}
+.green{background:green;}
+.blue{background:blue;}
+.black{
+    background:black;
+    border:2px solid white;
+}
+
+.active{
+    transform:scale(1.2);
+    box-shadow:0 0 20px yellow;
+}
+</style>
+</head>
+<body>
+
+<h1 id="timer">30</h1>
+
+<div class="container">
+    <div class="circle red"></div>
+    <div class="circle green"></div>
+    <div class="circle blue"></div>
+    <div class="circle black"></div>
+</div>
+
+<script>
+
+const timer = document.getElementById("timer");
+const circles = document.querySelectorAll(".circle");
+
+let time = 30;
+let randomIndex = 0;
+let interval;
+
+// Highlight a random circle
+function randomCircle(){
+
+    circles.forEach(c=>{
+        c.classList.remove("active");
+    });
+
+    randomIndex = Math.floor(Math.random()*circles.length);
+
+    circles[randomIndex].classList.add("active");
+}
+
+function startGame(){
+
+    randomCircle();
+
+    interval = setInterval(()=>{
+
+        time--;
+        timer.innerText = time;
+
+        randomCircle();
+
+        if(time<=0){
+            clearInterval(interval);
+            timer.innerText="Game Over";
+        }
+
+    },1000);
+}
+
+circles.forEach((circle,index)=>{
+
+    circle.addEventListener("click",()=>{
+
+        if(index===randomIndex){
+
+            clearInterval(interval);
+
+            timer.innerText="🎉 You Win!";
+
+            circles[randomIndex].classList.remove("active");
+
+        }
+
+    });
+
+});
+
+startGame();
+
+</script>
+
+</body>
+</html>

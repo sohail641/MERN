@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reflex Tester</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#1b1b1b;
+    color:white;
+}
+
+.game{
+    width:400px;
+    text-align:center;
+    background:#2c2c2c;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(255,255,255,.2);
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+#message{
+    font-size:20px;
+    margin:20px 0;
+}
+
+#timer{
+    font-size:45px;
+    margin:20px 0;
+    color:#00ff99;
+}
+
+button{
+    padding:15px 35px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin:10px;
+}
+
+#startBtn{
+    background:#00c853;
+    color:white;
+}
+
+#stopBtn{
+    background:gray;
+    color:white;
+}
+
+.ready{
+    background:red !important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<h1>⚡ Reflex Test</h1>
+
+<p id="message">Press START</p>
+
+<div id="timer">0 ms</div>
+
+<button id="startBtn">START</button>
+<button id="stopBtn">STOP</button>
+
+</div>
+
+<script>
+
+const startBtn=document.getElementById("startBtn");
+const stopBtn=document.getElementById("stopBtn");
+const message=document.getElementById("message");
+const timer=document.getElementById("timer");
+
+let startTime;
+let timeout;
+let canClick=false;
+
+startBtn.addEventListener("click",()=>{
+
+    clearTimeout(timeout);
+
+    stopBtn.classList.remove("ready");
+    canClick=false;
+
+    message.innerText="Wait for the STOP button to turn RED...";
+    timer.innerText="0 ms";
+
+    let randomDelay=Math.floor(Math.random()*3000)+2000;
+
+    timeout=setTimeout(()=>{
+
+        stopBtn.classList.add("ready");
+        message.innerText="CLICK NOW!";
+        startTime=performance.now();
+        canClick=true;
+
+    },randomDelay);
+
+});
+
+stopBtn.addEventListener("click",()=>{
+
+    if(!canClick){
+
+        clearTimeout(timeout);
+        message.innerText="❌ Too Early! Press START Again";
+        stopBtn.classList.remove("ready");
+        return;
+    }
+
+    let endTime=performance.now();
+
+    let reaction=Math.round(endTime-startTime);
+
+    timer.innerText=reaction+" ms";
+
+    message.innerText="🎉 Great! Your reaction time is "+reaction+" ms";
+
+    stopBtn.classList.remove("ready");
+    canClick=false;
+
+});
+
+</script>
+
+</body>
+</html>
